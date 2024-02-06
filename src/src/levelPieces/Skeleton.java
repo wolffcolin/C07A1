@@ -6,7 +6,7 @@ import src.gameEngine.Drawable;
 import src.gameEngine.InteractionResult;
 
 
-public abstract class Skeleton extends GamePiece implements Moveable, Drawable {
+public class Skeleton extends GamePiece implements Moveable, Drawable {
 	private int patrolLocation = 0;
 	private int direction = 1;
 	
@@ -30,7 +30,13 @@ public abstract class Skeleton extends GamePiece implements Moveable, Drawable {
 	}
 	
 	
-	public void move() {
+	public void draw() {
+		System.out.print(symbol);
+	}
+
+	@Override
+	public void move(Drawable[] gameBoard, int playerLocation) {
+		// TODO Auto-generated method stub
 		if(patrolLocation < 3) {
 			patrolLocation++;
 		} else {
@@ -43,9 +49,5 @@ public abstract class Skeleton extends GamePiece implements Moveable, Drawable {
 		} else {
 			super.setLocation(getLocation()-1);
 		}
-	}
-	
-	public void draw() {
-		System.out.println(symbol);
 	}
 }

@@ -3,7 +3,7 @@ package src.levelPieces;
 import src.gameEngine.Drawable;
 import src.gameEngine.InteractionResult;
 
-public abstract class Mage extends GamePiece implements Drawable {
+public class Mage extends GamePiece implements Drawable {
 
 	public Mage(char symbol, String label, int location) {
 		super(symbol, label, location);
@@ -21,7 +21,7 @@ public abstract class Mage extends GamePiece implements Drawable {
 	}
 	
 	public void draw() {
-		System.out.println(symbol);
+		System.out.print(symbol);
 	}
 
 }
