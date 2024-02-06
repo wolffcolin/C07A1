@@ -1,9 +1,9 @@
-package gameEngine;
+package src.gameEngine;
 
 import java.util.ArrayList;
 
-import levelPieces.GamePiece;
-import levelPieces.LevelSetup;
+import src.levelPieces.GamePiece;
+import src.levelPieces.LevelSetup;
 
 /**
  * Framework for LevelGame.

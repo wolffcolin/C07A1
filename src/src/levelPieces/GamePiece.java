@@ -1,13 +1,12 @@
-package levelPieces;
+package src.levelPieces;
 
-import gameEngine.Drawable;
-import gameEngine.GameEngine;
-import gameEngine.InteractionResult;
+import src.gameEngine.Drawable;
+import src.gameEngine.GameEngine;
+import src.gameEngine.InteractionResult;
 
 /**
  *  This is an abstract class because it contains an abstract 
  *  method AND an instance variable
- * 
  * @author Mark Baldwin
  * @author Cyndi Rader
  *
@@ -15,7 +14,7 @@ import gameEngine.InteractionResult;
 public abstract class GamePiece implements Drawable {
 	// Interfaces cannot have instance variables
 	protected char symbol;
-	private String label ;
+	private String label;
 	// Stores the piece location, which will be needed to interact
 	// with the player. 
 	private int location;

@@ -1,4 +1,4 @@
-package gameEngine;
+package src.gameEngine;
 
 /**
  * To handle all moveable pieces
