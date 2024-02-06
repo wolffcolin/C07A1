@@ -68,63 +68,19 @@ public class LevelSetup {
 				movingPieces.add((Moveable) elements[i]);
 			} 
 		}
-		
-		System.out.print("MOVING PIECES: ");
-		for (int i = 0; i < movingPieces.size(); i++) {
-			System.out.print(" " + movingPieces.get(i) + " ");
-		}
-		System.out.println();
+	
 		
 		return movingPieces;
 	}
 
 	public ArrayList<GamePiece> getInteractingPieces() {
 		
-		/*
-		ArrayList<GamePiece> allPieces = new ArrayList<>();
+		ArrayList<GamePiece> interactingPieces = new ArrayList<>();
 		
 		for (int i = 0; i < elements.length; i++) {
 			if (elements[i] instanceof GamePiece) {
-				allPieces.add((GamePiece) elements[i]);;
+				interactingPieces.add((GamePiece) elements[i]);;
 			}
-		}
-		
-		ArrayList<GamePiece> interactingPieces = new ArrayList<>();
-		
-		for (int i = 0; i < allPieces.size(); i++) {
-			for (int j = i + 1; j < allPieces.size(); j++) {
-				if (allPieces.get(i).getLocation() == allPieces.get(j).getLocation()) {
-					if (!interactingPieces.contains(allPieces.get(i))) {
-						interactingPieces.add(allPieces.get(i));
-					}
-					
-					if (!interactingPieces.contains(allPieces.get(j))) {
-						interactingPieces.add(allPieces.get(j));					
-					}
-				}
-			}
-		}
-		
-		System.out.print("Interacting PIECES: ");
-		for (int i = 0; i < interactingPieces.size(); i++) {
-			System.out.print(" " + interactingPieces.get(i) + " ");
-		}
-		System.out.println();
-		System.out.println("SIZE: " + interactingPieces.size());
-
-		return interactingPieces;
-		*/
-		ArrayList<GamePiece> interactingPieces = new ArrayList<>();
-		
-		ArrayList<GamePiece> allPieces = new ArrayList<>();
-		
-		for (int i = 0; i < elements.length; i++) {
-			if (elements[i] instanceof GamePiece) {
-				allPieces.add((GamePiece) elements[i]);;
-			}
-		}
-		
-		for (int i = 0; i < allPieces.size(); i++) {
 		}
 		
 		return interactingPieces;

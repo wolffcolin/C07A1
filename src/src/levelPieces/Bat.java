@@ -31,8 +31,8 @@ public class Bat extends GamePiece implements Moveable, Drawable{
 	}
 
 	@Override
+	// TODO fix potential overflow from rand generation
 	public void move(Drawable[] gameBoard, int playerLocation) {
-		// TODO Auto-generated method stub
 		Random rand = new Random();
 		int randInt = rand.nextInt(4);
 		if(randInt == 0) {
