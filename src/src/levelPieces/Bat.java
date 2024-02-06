@@ -7,7 +7,7 @@ import java.util.Random;
 import src.gameEngine.Drawable;
 import src.gameEngine.InteractionResult;
 
-public abstract class Bat extends GamePiece implements Moveable{
+public abstract class Bat extends GamePiece implements Moveable, Drawable{
 
 	public Bat(char symbol, String label, int location) {
 		super(symbol, label, location);
@@ -17,7 +17,12 @@ public abstract class Bat extends GamePiece implements Moveable{
 	@Override
 	public InteractionResult interact(Drawable[] gameBoard, int playerLocation) {
 		// TODO Auto-generated method stub
-		return InteractionResult.HIT;
+		if(playerLocation == super.getLocation()) {
+			return InteractionResult.HIT;
+		} else {
+			return InteractionResult.NONE;
+		}
+		
 	}
 	
 	public void move() {
@@ -32,6 +37,10 @@ public abstract class Bat extends GamePiece implements Moveable{
 		} else {
 			super.setLocation(super.getLocation() - 2);
 		}
+	}
+	
+	public void draw() {
+		System.out.println(symbol);
 	}
 
 }

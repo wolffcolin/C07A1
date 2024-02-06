@@ -3,7 +3,7 @@ package src.levelPieces;
 import src.gameEngine.Drawable;
 import src.gameEngine.InteractionResult;
 
-public abstract class Fairy extends GamePiece {
+public abstract class Fairy extends GamePiece implements Drawable {
 
 	public Fairy(char symbol, String label, int location) {
 		super(symbol, label, location);
@@ -19,6 +19,10 @@ public abstract class Fairy extends GamePiece {
 			return InteractionResult.NONE;
 		}
 
+	}
+	
+	public void draw() {
+		System.out.println(symbol);
 	}
 
 }
