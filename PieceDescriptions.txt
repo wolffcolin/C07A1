@@ -2,15 +2,13 @@ KerPlop
 
 
 Implements Drawable (no interaction and not actually a game piece, so doesn't extend GamePiece)
-	Doormat 
+	Wall
 Extends GamePiece, implements Moveable
-	Minion.  Moves right (jumping over other pieces) until it reaches the rightmost space. Then moves left (jumping over other pieces) until it reaches the leftmost space. Continues in this pattern indefinitely.
-	RandomMotionPiece. Since there would be a couple of pieces that move randomly, to avoid repeating code an abstract child class of GamePiece that implemented Moveable was implemented. No  objects of this type were created (it's abstract), and this piece does not override interact.
-	Sniper and Unicorn move randomly
+	Bat. Moves randomly, can move up to 2 tiles left or right.
+	Skeleton. Moves 3 spaces to the right, then back to its original starting point, and repeats.
+	
 Extends GamePiece with various InteractionResult
-	NONE - Minion.
-	HIT/NONE - BumbleBee (interacts on same location)
-	KILL/NONE - Sniper (will kill a player that comes within 3 squares, unless there's another object in between (a piece on the same square as the player also "blocks" the sniper's shot).
-	KILL/NONE - Kangalo. (will kill a player that is on the same square or beside it)
-	ADVANCE/NONE - Unicorn (interacts on same location)
-	GET_POINT/NONE - Prize (Gives a point if the player lands on it). 
+	KILL/NONE - Guard (interacts on same location)
+	HIT/NONE - Bat (interacts on same location)
+	KILL/ADVANCE/NONE - Mage. (will kill a player that is on a square beside it. It will advance the player if the player lands on the mage.)
+	GET_POINT/NONE - Fairy (Gives a point if the player lands on it). 
