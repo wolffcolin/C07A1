@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Test;
 import src.gameEngine.Drawable;
 import src.gameEngine.GameEngine;
 import src.gameEngine.InteractionResult;
+import src.levelPieces.Bat;
+import src.levelPieces.Fairy;
+import src.levelPieces.Guard;
+import src.levelPieces.Mage;
 import src.levelPieces.Skeleton;
 
 class TestInteractions {
@@ -37,14 +41,14 @@ class TestInteractions {
 		Bat bat = new Bat('B', "bat", 10);
 		gameBoard[10] = bat;
 		
-		assertEquals(InteractionResult.HIT, bat.interact(gameBoard, 10);
+		assertEquals(InteractionResult.HIT, bat.interact(gameBoard, 10));
 		
 		for (int i = 0; i < 10; i++) {
-			assertEquals(InteractionResult.NONE, bat.interact(gameBoard, i);
+			assertEquals(InteractionResult.NONE, bat.interact(gameBoard, i));
 		}
 		
-		for (int i = 11; i < GameEngine.Board_Size; i++) {
-			assertEquals(InteractionResult.NONE, bat.interact(gameBoard, i);
+		for (int i = 11; i < GameEngine.BOARD_SIZE; i++) {
+			assertEquals(InteractionResult.NONE, bat.interact(gameBoard, i));
 		}
 	}
 	
@@ -54,14 +58,14 @@ class TestInteractions {
 		Fairy fairy = new Fairy('F', "fairy", 10);
 		gameBoard[10] = fairy;
 		
-		assertEquals(InteractionResult.ADD_POINT, fairy.interact(gameBoard, 10);
+		assertEquals(InteractionResult.GET_POINT, fairy.interact(gameBoard, 10));
 		
 		for (int i = 0; i < 10; i++) {
-			assertEquals(InteractionResult.NONE, fairy.interact(gameBoard, i);
+			assertEquals(InteractionResult.NONE, fairy.interact(gameBoard, i));
 		}
 		
-		for (int i = 11; i < GameEngine.Board_Size; i++) {
-			assertEquals(InteractionResult.NONE, fairy.interact(gameBoard, i);
+		for (int i = 11; i < GameEngine.BOARD_SIZE; i++) {
+			assertEquals(InteractionResult.NONE, fairy.interact(gameBoard, i));
 		}
 	}
 	
@@ -71,14 +75,14 @@ class TestInteractions {
 		Guard guard = new Guard('G', "guard", 10);
 		gameBoard[10] = guard;
 		
-		assertEquals(InteractionResult.KILL, guard.interact(gameBoard, 10);
+		assertEquals(InteractionResult.KILL, guard.interact(gameBoard, 10));
 		
 		for (int i = 0; i < 10; i++) {
-			assertEquals(InteractionResult.NONE, guard.interact(gameBoard, 10);
+			assertEquals(InteractionResult.NONE, guard.interact(gameBoard, 10));
 		}
 		
-		for (int i = 11; i < GameEngine.Board_Size; i++) {
-			assertEquals(InteractionResult.NONE, guard.interact(gameBoard, 10);
+		for (int i = 11; i < GameEngine.BOARD_SIZE; i++) {
+			assertEquals(InteractionResult.NONE, guard.interact(gameBoard, 10));
 		}
 	}
 	
@@ -88,16 +92,16 @@ class TestInteractions {
 		Mage mage = new Mage('M', "Mage", 10);
 		gameBoard[10] = mage;
 		
-		assertEquals(InteractionResult.HIT, mage.interact(gameBoard, 9);
-		assertEquals(InteractionResult.HIT, mage.interact(gameBoard, 11);
-		assertEquals(InteractionResult.ADVANCE, mage.interact(gameBoard, 10);
+		assertEquals(InteractionResult.HIT, mage.interact(gameBoard, 9));
+		assertEquals(InteractionResult.HIT, mage.interact(gameBoard, 11));
+		assertEquals(InteractionResult.ADVANCE, mage.interact(gameBoard, 10));
 		
 		for (int i = 0; i < 9; i++) {
-			assertEquals(InteractionResult.NONE, mage.interact(gameBoard, i);
+			assertEquals(InteractionResult.NONE, mage.interact(gameBoard, i));
 		}
 		
-		for (int i = 12; i < GameEngine.Board_Size; i++) {
-			assertEquals(InteractionResult.NONE, mage.interact(gameBoard, i);
+		for (int i = 12; i < GameEngine.BOARD_SIZE; i++) {
+			assertEquals(InteractionResult.NONE, mage.interact(gameBoard, i));
 		}
 	}
 	

@@ -10,11 +10,10 @@ import src.gameEngine.InteractionResult;
 import src.levelPieces.Skeleton;
 
 class TestMovingPieces {
-
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
 	
+	@Test
+	void testSkeletonMovement() {
+		
+	}
 
 }
