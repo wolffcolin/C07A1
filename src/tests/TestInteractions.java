@@ -1,3 +1,13 @@
+/*
+ * 
+Class: TestInteractions
+Description: Tests interactions of all GamePieces
+Authors: Colin Wolff and Matt McGrath
+Date: 2/9/2024
+Collaborators: N/A
+Sources: N/A
+*/
+
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,32 +27,41 @@ class TestInteractions {
 	
 	@Test
 	void testSkeleton() {
-		Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
-		Skeleton skeleton = new Skeleton('S', "skeleton", 10);
-		gameBoard[10] = skeleton;
-		
-		for(int i = 8; i < 13; i++) {
-			assertEquals(InteractionResult.HIT, skeleton.interact(gameBoard, i));
-		}
-		
-		
-		for (int i = 0; i < 10; i++) {
-			assertEquals(InteractionResult.HIT, skeleton.interact(gameBoard, i));
-		}
-		
-		for (int i = 11; i < GameEngine.BOARD_SIZE; i++) {
-			assertEquals(InteractionResult.NONE, skeleton.interact(gameBoard, i));
-		}
+		//creates board, and skeleton and sets skeleton start to 10
+        int skeletonLocation = 10;
+        Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
+        Skeleton skeleton = new Skeleton('S', "skeleton", skeletonLocation);
+        gameBoard[skeletonLocation] = skeleton;
+        
+        //test interactions that should result in a HIT
+        //directly on the skeleton, one or two spaces away
+        assertEquals(InteractionResult.HIT, skeleton.interact(gameBoard, skeletonLocation));
+        assertEquals(InteractionResult.HIT, skeleton.interact(gameBoard, skeletonLocation - 1));
+        assertEquals(InteractionResult.HIT, skeleton.interact(gameBoard, skeletonLocation + 1));
+        assertEquals(InteractionResult.HIT, skeleton.interact(gameBoard, skeletonLocation - 2));
+        assertEquals(InteractionResult.HIT, skeleton.interact(gameBoard, skeletonLocation + 2));
+        
+        //test interactions that should result in NONE
+        //anywhere else on the board
+        for (int i = 0; i < gameBoard.length; i++) {
+            if (i < skeletonLocation - 2 || i > skeletonLocation + 2) { // Outside hit range
+                assertEquals(InteractionResult.NONE, skeleton.interact(gameBoard, i), "Interaction at distance should result in NONE.");
+            }
+        }
 		
 	}
 	@Test
 	void testBat() {
+		//creates board and bat and sets bat start to 10
+		int batLocation = 10;
 		Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
-		Bat bat = new Bat('B', "bat", 10);
-		gameBoard[10] = bat;
+		Bat bat = new Bat('B', "bat", batLocation);
+		gameBoard[batLocation] = bat;
 		
-		assertEquals(InteractionResult.HIT, bat.interact(gameBoard, 10));
+        //test interaction at the same location should result in HIT
+		assertEquals(InteractionResult.HIT, bat.interact(gameBoard, batLocation));
 		
+        //test interactions at any other location should result in NONE
 		for (int i = 0; i < 10; i++) {
 			assertEquals(InteractionResult.NONE, bat.interact(gameBoard, i));
 		}
@@ -54,12 +73,16 @@ class TestInteractions {
 	
 	@Test
 	void testFairy() {
+		//creates board and fairy and sets fairy start to 10
+		int fairyLocation = 10;
 		Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
-		Fairy fairy = new Fairy('F', "fairy", 10);
-		gameBoard[10] = fairy;
+		Fairy fairy = new Fairy('F', "fairy", fairyLocation);
+		gameBoard[fairyLocation] = fairy;
 		
-		assertEquals(InteractionResult.GET_POINT, fairy.interact(gameBoard, 10));
+        //test interaction at the same location should result in GET_POINT
+		assertEquals(InteractionResult.GET_POINT, fairy.interact(gameBoard, fairyLocation));
 		
+        //test interactions at any other location should result in NONE
 		for (int i = 0; i < 10; i++) {
 			assertEquals(InteractionResult.NONE, fairy.interact(gameBoard, i));
 		}
@@ -71,31 +94,39 @@ class TestInteractions {
 	
 	@Test
 	void testGuard() {
-		Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
-		Guard guard = new Guard('G', "guard", 10);
-		gameBoard[10] = guard;
-		
-		assertEquals(InteractionResult.KILL, guard.interact(gameBoard, 10));
-		
-		for (int i = 0; i < 10; i++) {
-			assertEquals(InteractionResult.NONE, guard.interact(gameBoard, 10));
-		}
-		
-		for (int i = 11; i < GameEngine.BOARD_SIZE; i++) {
-			assertEquals(InteractionResult.NONE, guard.interact(gameBoard, 10));
-		}
+		//creates board and guard and sets guard start to 10
+		   int guardLocation = 10;
+	        Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
+	        Guard guard = new Guard('G', "guard", guardLocation);
+	        gameBoard[guardLocation] = guard;
+	        
+	        //test interaction at the same location should result in KILL
+	        assertEquals(InteractionResult.KILL, guard.interact(gameBoard, guardLocation));
+	        
+	        //test interactions at any other location should result in NONE
+	        for (int i = 0; i < gameBoard.length; i++) {
+	            if (i != guardLocation) { // Any position other than the guard's location
+	                assertEquals(InteractionResult.NONE, guard.interact(gameBoard, i));
+	            }
+	        }
 	}
 	
 	@Test
 	void testMage() {
+		//creates board and mage and sets mage start to 10
+		int mageLocation = 10;
 		Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
-		Mage mage = new Mage('M', "Mage", 10);
-		gameBoard[10] = mage;
+		Mage mage = new Mage('M', "Mage", mageLocation);
+		gameBoard[mageLocation] = mage;
 		
-		assertEquals(InteractionResult.HIT, mage.interact(gameBoard, 9));
-		assertEquals(InteractionResult.HIT, mage.interact(gameBoard, 11));
-		assertEquals(InteractionResult.ADVANCE, mage.interact(gameBoard, 10));
+        //test interactions at location 1 ahead or behind should result in KILL
+		assertEquals(InteractionResult.KILL, mage.interact(gameBoard, mageLocation - 1));
+		assertEquals(InteractionResult.KILL, mage.interact(gameBoard, mageLocation + 1));
 		
+        //test interactions at the same location should result in ADVANCE
+		assertEquals(InteractionResult.ADVANCE, mage.interact(gameBoard, mageLocation));
+		
+        //test interactions at any other location should result in NONE
 		for (int i = 0; i < 9; i++) {
 			assertEquals(InteractionResult.NONE, mage.interact(gameBoard, i));
 		}

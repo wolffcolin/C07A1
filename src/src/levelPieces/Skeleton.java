@@ -58,6 +58,7 @@ public class Skeleton extends GamePiece implements Moveable, Drawable {
 	//movement logic
 	public void move(Drawable[] gameBoard, int playerLocation) {
 		
+		//gather all empty spots on board
 		ArrayList<Integer> emptySpots = new ArrayList<>();
 		
 		for (int i = 0; i < gameBoard.length; i++) {
@@ -72,9 +73,11 @@ public class Skeleton extends GamePiece implements Moveable, Drawable {
 		
 		ArrayList<Integer> possibleSpots = new ArrayList<>();
 		
+		//creates possible range of movement
 		int possibleRangeNeg = oldIndex - 3;
 		int possibleRangePos = oldIndex + 3;
 		
+		//creates list of spots within +- 3
 		for (int i = 0; i < emptySpots.size(); i++) {
 			
 			if (emptySpots.get(i) < possibleRangePos && emptySpots.get(i) > possibleRangeNeg) {
@@ -83,6 +86,7 @@ public class Skeleton extends GamePiece implements Moveable, Drawable {
 			
 		}
 		
+		//randomly picks one of these spots
 		Random rand = new Random();
 		int randInt = rand.nextInt(possibleSpots.size());
 		
