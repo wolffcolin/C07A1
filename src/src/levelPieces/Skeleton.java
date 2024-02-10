@@ -13,14 +13,15 @@ package src.levelPieces;
 
 import src.gameEngine.Moveable;
 import src.gameEngine.GameEngine;
+
+import java.util.ArrayList;
+import java.util.Random;
+
 import src.gameEngine.Drawable;
 import src.gameEngine.InteractionResult;
 
 
 public class Skeleton extends GamePiece implements Moveable, Drawable {
-
-	//variable to track where the skeleton is in its movement
-	private int patrolLocation = 0;
 	
 	//direction the skeleton is going, + = right, - = left
 	private int direction = 1;
@@ -56,49 +57,40 @@ public class Skeleton extends GamePiece implements Moveable, Drawable {
 	@Override
 	//movement logic
 	public void move(Drawable[] gameBoard, int playerLocation) {
-		// TODO Auto-generated method stub
 		
-		//keeps skeleton in its patrol range
-		if(patrolLocation < 3) {
-			patrolLocation++;
-		} else {
-			direction *= -1;
-			patrolLocation = 0;
+		ArrayList<Integer> emptySpots = new ArrayList<>();
+		
+		for (int i = 0; i < gameBoard.length; i++) {
+			
+			if (gameBoard[i] == null) {
+				emptySpots.add(i);
+			}
+			
 		}
 		
-		
-		//current location of element
 		int oldIndex = this.getLocation();
 		
-		//distance the skeleton will travel
-		int travelDistance;
+		ArrayList<Integer> possibleSpots = new ArrayList<>();
 		
-		//patrol forward
-		if(direction == 1) {
+		int possibleRangeNeg = oldIndex - 3;
+		int possibleRangePos = oldIndex + 3;
+		
+		for (int i = 0; i < emptySpots.size(); i++) {
 			
-			//keeps skeleton in bounds of map
-			if (oldIndex + 1 >= GameEngine.BOARD_SIZE) {
-				travelDistance = 1;
-			} else {
-				travelDistance = -1;
-			}
-			
-		//patrol backwards
-		} else {
-			
-			//keeps skeleton in bounds of map
-			if (oldIndex - 1 <= 0) {
-				travelDistance = -1;
-			} else {
-				travelDistance = 1;
+			if (emptySpots.get(i) < possibleRangePos && emptySpots.get(i) > possibleRangeNeg) {
+				possibleSpots.add(emptySpots.get(i));
 			}
 			
 		}
 		
-		//sets location to new spot
-		gameBoard[oldIndex + travelDistance] = gameBoard[oldIndex];
+		Random rand = new Random();
+		int randInt = rand.nextInt(possibleSpots.size());
+		
+		int newIndex = possibleSpots.get(randInt);
+	
+		gameBoard[newIndex] = gameBoard[oldIndex];
 		gameBoard[oldIndex] = null;
-		this.setLocation(oldIndex + travelDistance); 
+		this.setLocation(newIndex);
 		
 		
 	}

@@ -12,6 +12,7 @@ package src.levelPieces;
 
 import src.gameEngine.Moveable;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import src.gameEngine.Drawable;
@@ -46,65 +47,32 @@ public class Bat extends GamePiece implements Moveable, Drawable{
 
 	@Override
 	//logic to manage movement
-	public void move(Drawable[] gameBoard, int playerLocation) {
+		public void move(Drawable[] gameBoard, int playerLocation) {
 		
-		//setup for random num gen
-		Random rand = new Random();
-		int randInt = rand.nextInt(4);
-		
-		//old location of Bat
-		int oldIndex = this.getLocation();
-		
-		//variable to hold offset
-		int travelDistance;
-		
-		//move forward one
-		if(randInt == 0) {
+			ArrayList<Integer> emptySpots = new ArrayList<>();
 			
-			if (oldIndex + 1 >= GameEngine.BOARD_SIZE) {
-				travelDistance = 1;
-			} else {
-				travelDistance = -1;
+			for (int i = 0; i < gameBoard.length; i++) {
+				if (gameBoard[i] == null) {
+					emptySpots.add(i);
+				}
 			}
 			
-		//move backward one
-		} else if(randInt == 1) {
+			//setup for random num gen
+			Random rand = new Random();
+			int randInt = rand.nextInt(emptySpots.size());
 			
-			if (oldIndex - 1 <= 0) {
-				travelDistance = -1;
-			} else {
-				travelDistance = 1;
-			}
+			int newIndex = emptySpots.get(randInt);
+			int oldIndex = this.getLocation();
+
+			//set location to new location in board
+			gameBoard[newIndex] = gameBoard[oldIndex];
+			gameBoard[oldIndex] = null;
 			
-		//move forward two
-		} else if (randInt == 2){
-			
-			if (oldIndex + 1 >= GameEngine.BOARD_SIZE) {
-				travelDistance = 2;
-			} else {
-				travelDistance = -2;
-			}
-			
-		//move backward two
-		} else {
-			
-			if (oldIndex - 1 <= 0) {
-				travelDistance = -2;
-			} else {
-				travelDistance = 2;
-			}
-			
+			this.setLocation(newIndex); 
+	
+	
+	
 			
 		}
-		
-		//set location to new location in board
-		gameBoard[oldIndex + travelDistance] = gameBoard[oldIndex];
-		gameBoard[oldIndex] = null;
-		this.setLocation(oldIndex + travelDistance); 
-
-
-
-		
-	}
 
 }
